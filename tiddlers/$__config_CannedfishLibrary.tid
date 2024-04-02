@@ -1,0 +1,7 @@
+caption: {{$:/language/fishing-cannedfish/cannedfishlibrary}}
+tags: $:/tags/PluginLibrary
+title: $:/config/CannedfishLibrary
+type: text/vnd.tiddlywiki
+url: https://oflg.github.io/fishing-cannedfish/library/
+
+{{$:/language/fishing-cannedfish/cannedfishlibrarytip}}

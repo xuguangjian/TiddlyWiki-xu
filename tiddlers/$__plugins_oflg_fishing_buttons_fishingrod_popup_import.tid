@@ -1,0 +1,13 @@
+title: $:/plugins/oflg/fishing/buttons/fishingrod/popup/import
+type: text/vnd.tiddlywiki
+
+<div
+    style="min-width:0;font-size:10pt;"
+>
+    <$list filter="[all[shadows+tiddlers]tag[$:/tags/FishingBait]!is[draft]]">
+        <$transclude
+            tiddler="$:/plugins/oflg/fishing/ui/ViewTemplate/button"
+            mode="inline"
+        />
+    </$list>
+</div>

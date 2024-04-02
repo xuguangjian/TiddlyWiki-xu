@@ -1,0 +1,6 @@
+tags: $:/tags/FishingFilter/learning
+title: $:/config/FishingFilter/Learning/twpub
+type: text/vnd.tiddlywiki
+
+[<currentTiddler>!tag[!]has[twpub]]
+-[<currentTiddler>sameday:review<now YYYY0MM0DD>]

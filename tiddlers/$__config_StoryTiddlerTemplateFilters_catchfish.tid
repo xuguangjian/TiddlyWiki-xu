@@ -1,0 +1,8 @@
+list-before: $:/config/StoryTiddlerTemplateFilters/default
+tags: $:/tags/StoryTiddlerTemplateFilter
+title: $:/config/StoryTiddlerTemplateFilters/catchfish
+type: text/vnd.tiddlywiki
+
+[<currentTiddler>]
+:cascade[all[shadows+tiddlers]tag[$:/tags/FishingFilter/annotation]!is[draft]get[text]]
++[!is[blank]limit[1]then[$:/plugins/oflg/fishing-catchfish/ui/ViewTemplate/tiddler]]

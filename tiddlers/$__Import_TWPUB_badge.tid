@@ -1,0 +1,126 @@
+code-body: yes
+title: $:/Import/TWPUB/badge
+type: text/vnd.tiddlywiki
+
+<$button
+    popup=<<qualify "$:/state/popup/badge">>
+    class="twpub-badge"
+>
+    <div
+        class="twpub-badge-cover"
+    >
+        <$list
+            filter="[<currentTiddler>has[cover-image]]"
+            variable="ignore"
+            emptyMessage="{{$:/Import/TWPUB/default-book-cover}}"
+        >
+            <$transclude
+                tiddler=<<currentTiddler>>
+                subtiddler={{!!cover-image}}
+            />
+        </$list>
+    </div>
+    <div
+        class="twpub-badge-text"
+    >
+        <div
+            class="twpub-badge-title"
+        >
+            <$text
+                text={{!!epub-title}}
+            />
+        </div>
+        <div
+            class="twpub-badge-author"
+        >
+            <$text
+                text={{!!epub-creator}}
+            />
+        </div>
+    </div>
+</$button>
+<$reveal
+    state=<<qualify "$:/state/popup/badge">>
+    type="popup"
+    position="below"
+    tag="div"
+    class="twpub-badge-dropdown"
+    animate="yes"
+>
+    <div
+        class="tc-drop-down-wrapper"
+    >
+        <div
+            class="tc-drop-down"
+            style="min-width:0;"
+        >
+            <$button
+                class="tc-btn-invisible"
+                disabled={{{ [all[tiddlers+shadows]twpub<currentTiddler>then[yes]else[no]] }}}
+            >
+                <$action-createtiddler
+                    $basetitle={{!!epub-title}}
+                    book=<<currentTiddler>>
+                >
+                    <$let
+                        fishingrod="[twpub[currentTiddler]!tag[!]]"
+                        text={{{ [[/text/]addprefix<currentTiddler>] }}}
+                        toc={{{ [[/toc/]addprefix<currentTiddler>] }}}
+                        firstText={{{ [[/text/000000000]addprefix<currentTiddler>] }}}
+                        lastText={{{ [{!!count-chunks}subtract[1]pad[9]addprefix[/text/]addprefix<currentTiddler>] }}}
+                    >
+                        <$action-setfield
+                            $tiddler={{{ [<fishingrod>search-replace[currentTiddler],<currentTiddler>addprefix[$:/plugins/oflg/fishing/fishingrod/]] }}}
+                            caption=<<createTiddler-title>>
+                            text="""{"dueorder": "[sortan[]]","neworder": "[sortan[]]"}"""
+                            type="application/json"
+                        />
+                        <$list
+                            filter="[all[tiddlers+shadows]prefix<toc>sortan[]]"
+                            variable="tocTiddler"
+                            counter="counter"
+                        >
+                            <$action-createtiddler
+                                $basetitle={{{ [<createTiddler-title>] [<tocTiddler>split[/]last[]] [<tocTiddler>get[caption]] +[join[/]] }}}
+                                tags={{{ [<createTiddler-title>] [<tocTiddler>tags[]split[/]last[]!match[toc]] [<tocTiddler>tags[]get[caption]] +[join[/]format:titlelist[]] }}}
+                                twpub-after={{{ [<counter-first>match[yes]then<firstText>] ~[<tocTiddler>get[target]] }}}
+                                twpub-before={{{ [<counter-last>match[yes]then<lastText>] ~[all[tiddlers+shadows]prefix<toc>sortan[]after<tocTiddler>first[]get[target]] }}}
+                                twpub=<<currentTiddler>>
+                                caption="{{||Excerpt}}"
+                            />
+                        </$list>
+                    </$let>
+                </$action-createtiddler>
+                <$text text={{{ [all[tiddlers+shadows]twpub<currentTiddler>then{$:/language/fishing-twpub/added}else{$:/language/fishing-twpub/add}] }}}/>
+            </$button>
+            <$button
+                class="tc-btn-invisible"
+            >
+                <$let
+                    fishingrod="[twpub[currentTiddler]!tag[!]]"
+                >
+                     <$list
+                        filter="[all[tiddlers+shadows]twpub<currentTiddler>first[]]"
+                        variable="ignore"
+                    >
+                        <$action-setfield
+                            $tiddler={{{ [<fishingrod>search-replace[currentTiddler],<currentTiddler>addprefix[$:/plugins/oflg/fishing/fishingrod/]] }}}
+                            caption={{!!epub-title}}
+                            text="""{"dueorder": "[sortan[]]","neworder": "[sortan[]]"}"""
+                            type="application/json"
+                        />
+                        {{$:/language/fishing-twpub/readd}}
+                    </$list>
+                </$let>
+            </$button>
+            <$button
+                class="tc-btn-invisible"
+            >
+                <$action-navigate
+                    $to=<<currentTiddler>>
+                />
+                {{$:/language/fishing-twpub/opentwpub}}
+            </$button>
+        </div>
+    </div>
+</$reveal>

@@ -1,0 +1,4 @@
+title: $:/language/tidme/defaulttip
+type: text/vnd.tiddlywiki
+
+<center>此为不可自定义的默认牌组，可通过''{{$:/language/tidme/createdeck}}''进行自定义。</center>

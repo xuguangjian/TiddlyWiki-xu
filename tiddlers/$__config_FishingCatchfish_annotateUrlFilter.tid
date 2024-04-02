@@ -1,0 +1,4 @@
+title: $:/config/FishingCatchfish/annotateUrlFilter
+type: text/vnd.tiddlywiki
+
+[{!!word}encodeuricomponent[]addprefix[https://dict.youdao.com/recite/words/#!/dict/engchn?le=eng&q=]]

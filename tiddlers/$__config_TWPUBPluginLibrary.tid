@@ -1,0 +1,8 @@
+caption: {{$:/language/fishing-twpub/twpublibrary}}
+library-type: twpub
+tags: $:/tags/PluginLibrary
+title: $:/config/TWPUBPluginLibrary
+type: text/vnd.tiddlywiki
+url: https://twpub-tools.org/library/
+
+{{$:/language/fishing-twpub/twpublibrarytip}}

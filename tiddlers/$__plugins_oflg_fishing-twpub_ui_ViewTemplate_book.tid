@@ -1,0 +1,21 @@
+code-body: yes
+list-after: $:/core/ui/ViewTemplate/body
+tags: $:/tags/ViewTemplate
+title: $:/plugins/oflg/fishing-twpub/ui/ViewTemplate/book
+type: text/vnd.tiddlywiki
+
+<$list
+    filter="[<currentTiddler>has[book]]"
+>
+    <$transclude
+        tiddler={{{ [{!!book}addsuffix[/cover]] }}}
+    />
+
+    <div class="tc-table-of-contents">
+        <$macrocall
+            $name="toc-selective-expandable"
+            tag={{!!title}}
+            sort="sortan[]"
+        />
+    </div>
+</$list>

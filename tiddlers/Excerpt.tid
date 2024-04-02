@@ -1,0 +1,5 @@
+code-body: yes
+title: Excerpt
+type: text/vnd.tiddlywiki
+
+{{{ [{!!title}split[/]last[]] }}}
