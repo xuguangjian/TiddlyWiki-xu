@@ -1,0 +1,4 @@
+title: $:/plugins/Gk0Wk/echarts/addons/TheBrainPopup
+type: text/vnd.tiddlywiki
+
+<h1><$text text=<<currentTiddler>> /></h1><$list filter="[<currentTiddler>tags[]count[]match[0]]"><$transclude tiddler="$:/core/ui/ViewTemplate/tags" /></$list><$transclude tiddler="$:/core/ui/ViewTemplate/body" mode="inline" />

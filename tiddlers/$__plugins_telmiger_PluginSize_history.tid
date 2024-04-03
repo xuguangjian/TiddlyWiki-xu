@@ -1,0 +1,17 @@
+created: 20231227141710403
+creator: Thomas Elmiger
+modified: 20231231003218100
+modifier: Thomas Elmiger
+tags: 
+title: $:/plugins/telmiger/PluginSize/history
+type: text/vnd.tiddlywiki
+
+!! History
+
+* ''1.0.1'' -- 2023-12-31 -- feature update
+** No plugin dependencies anymore: 
+*** //rpn// is no longer needed.
+*** //Harvey Balls// is an option now.
+** MIT license
+
+* ''0.0.9'' -- 2019-03-10 -- initial release

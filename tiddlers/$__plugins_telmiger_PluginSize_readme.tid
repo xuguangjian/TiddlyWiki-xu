@@ -1,0 +1,27 @@
+created: 20190127210600496
+creator: Thomas Elmiger
+modified: 20231227143703867
+modifier: Thomas Elmiger
+tags: 
+title: $:/plugins/telmiger/PluginSize/readme
+type: text/vnd.tiddlywiki
+
+!! Plugin Size
+
+{{$:/plugins/telmiger/PluginSize/about}}
+
+The same information can be found on [[$:/plugins/telmiger/PluginSize/plugin-info]].
+
+!!! Categories (character count)
+
+* <<HB5>> up to 25 k
+* <<HB8>> up to 50 k
+* <<HB13>> up to 100 k
+* <<HB21>> up to 500 k 
+* <<HB34>> more than 500 k
+
+!!! Optional graphics
+
+Size indicating icons are shown if my other plugin [[Harvey Balls|https://tid.li/tw5/plugins.html#%24%3A%2Fplugins%2Ftelmiger%2FHarveyBalls]] is installed.
+
+{{$:/plugins/telmiger/PluginSize/history}}

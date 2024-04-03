@@ -1,0 +1,23 @@
+modified: 20231229042806833
+tags: 
+title: $:/plugins/kookma/hsl/ui/ControlPanel/setting-switch-gutter
+type: text/vnd.tiddlywiki
+
+\define styleTids()
+[[$:/plugins/kookma/hsl/styles/show-all-line-numbers.css]]
+[[$:/plugins/kookma/hsl/styles/linenumbers.css]]
+[[$:/plugins/kookma/hsl/styles/skin.css]]
+\end
+\define hide()
+<$list filter="[enlist<styleTids>]">
+<$action-listops $tiddler=<<currentTiddler>>  $tags="-$:/tags/Stylesheet"/>
+</$list>>
+\end
+\define show()
+<$list filter="[enlist<styleTids>]">
+<$action-listops $tiddler=<<currentTiddler>>  $tags="+$:/tags/Stylesheet"/>
+</$list>>
+\end
+
+;Switch Gutter 
+:<$checkbox tiddler="$:/config/Hsl/Gutter" field="text" checked=hide unchecked=show checkactions=<<hide>>  uncheckactions=<<show>> > Turn off gutter, line numbers and line emphasizing</$checkbox>

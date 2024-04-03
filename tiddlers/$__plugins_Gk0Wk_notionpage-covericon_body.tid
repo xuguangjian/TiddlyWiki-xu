@@ -1,0 +1,145 @@
+list-before: $:/core/ui/ViewTemplate/title
+tags: $:/tags/ViewTemplate
+title: $:/plugins/Gk0Wk/notionpage-covericon/body
+type: text/vnd.tiddlywiki
+
+\define contentbase64() [<currentTiddler>is[binary]] :then[<currentTiddler>get[text]] :else[<currentTiddler>get[text]encodeuricomponent[]]
+\define imagetobase64() [[data:]] [{!!type}] [<currentTiddler>is[binary]then[;base64,]else[,]] [subfilter<contentbase64>] :and[join[]]
+\define coverbox-db(cover,tiddler:"",default:"",class-outer:"",class-blur-bg:"",class-front-bg:"",style-outer:"",style-blur-bg:"",style-front-bg:"")
+\whitespace trim
+<$let currentTiddler={{{ [<__cover__>!is[blank]then<__cover__>else<__default__>] }}}>
+<$let imguri={{{ [<currentTiddler>is[image]!has[_canonical_uri]] :then[subfilter<imagetobase64>] :else[<currentTiddler>get[_canonical_uri]else<currentTiddler>] }}}>
+<div class="$class-outer$" style="display:flex;position:relative;overflow:hidden;align-items:center;justify-content:center;$style-outer$" >
+<$let
+    img-bg={{{ [[background-image:url(]] [<imguri>] [[);]] +[join[]] }}}
+    cover-bg-blur={{{ [[filter:blur(]] [<__tiddler__>get[page-cover#bg-blur]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-bg-blur}] [[);]] +[join[]] }}}
+    cover-size={{{ [[background-size:]] [<__tiddler__>get[page-cover#size]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-size}else[cover]] [[;]] +[join[]] }}}
+    cover-position={{{ [[background-position:]] [<__tiddler__>get[page-cover#position]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-position}else[cover]] [[;]] +[join[]] }}}
+    cover-repeat={{{ [[background-repeat:]] [<__tiddler__>get[page-cover#repeat]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-repeat}else[no-repeat]] [[;]] +[join[]] }}}
+>
+<div class="$class-blur-bg$" style={{{ [<img-bg>] [[background-size:cover;background-position:center;position:absolute;top:-10px;left:-10px;height:calc(100% + 20px);width:calc(100% + 20px);]] [<cover-bg-blur>] [<__style-blur-bg__>] +[join[]] }}} />
+<div class="$class-front-bg$" style={{{ [<img-bg>] [<cover-size>] [<cover-position>] [<cover-repeat>] [[position:relative;height:100%;width:100%;]] [<__style-front-bg__>] +[join[]] }}} />
+</$let>
+</div>
+</$let>
+</$let>
+\end
+\define cover-setting()
+<$reveal type="popup" state=<<stateTiddler2>> position="belowleft" tag="div" class="tc-popup-keep">
+    <$let
+        state=<<qualify "$:/temp/Gk0Wk/notionpage-covericon/cover-setting">>
+        default-cover={{{ [<tiddler>get[page-cover]] }}}
+        cover-bg-blur={{{ [<tiddler>get[page-cover#bg-blur]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-bg-blur}] }}}
+        cover-size={{{ [<tiddler>get[page-cover#size]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-size}else[cover]] }}}
+        cover-position={{{ [<tiddler>get[page-cover#position]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-position}else[cover]] }}}
+        cover-repeat={{{ [<tiddler>get[page-cover#repeat]else{$:/plugins/Gk0Wk/notionpage-covericon/config/default-cover-repeat}else[no-repeat]] }}}
+    >
+    <div class="gk0wk-notionpageb-changecover-box">
+        <div>
+            <span style="user-select:none;opacity:0.8;font-weight:800;">URI:&nbsp;</span>
+            <$edit-text tiddler=<<state>> field="page-cover" default=<<default-cover>> placeholder=""/>
+            <$button setTitle=<<tiddler>> setField="page-cover" setTo={{{ [<state>get[page-cover]!is[blank]else<default-cover>] }}} style="color:inherit !important;cursor:pointer;font-weight:800;">Set</$button>
+        </div>
+        <div>
+            <span style="user-select:none;opacity:0.8;font-weight:800;">Blur:&nbsp;</span>
+            <$edit-text tiddler=<<state>> field="page-cover#bg-blur" default=<<cover-bg-blur>> placeholder=""/>
+            <$button setTitle=<<tiddler>> setField="page-cover#bg-blur" setTo={{{ [<state>get[page-cover#bg-blur]!is[blank]else<cover-bg-blur>] }}} style="color:inherit !important;cursor:pointer;font-weight:800;">Set</$button>
+        </div>
+        <div>
+            <span style="user-select:none;opacity:0.8;font-weight:800;">Size:&nbsp;</span>
+            <$edit-text tiddler=<<state>> field="page-cover#size" default=<<cover-size>> placeholder=""/>
+            <$button setTitle=<<tiddler>> setField="page-cover#size" setTo={{{ [<state>get[page-cover#size]!is[blank]else<cover-size>] }}} style="color:inherit !important;cursor:pointer;font-weight:800;">Set</$button>
+        </div>
+        <div>
+            <span style="user-select:none;opacity:0.8;font-weight:800;">Position:&nbsp;</span>
+            <$edit-text tiddler=<<state>> field="page-cover#position" default=<<cover-position>> placeholder=""/>
+            <$button setTitle=<<tiddler>> setField="page-cover#position" setTo={{{ [<state>get[page-cover#position]!is[blank]else<cover-position>] }}} style="color:inherit !important;cursor:pointer;font-weight:800;">Set</$button>
+        </div>
+        <div>
+            <span style="user-select:none;opacity:0.8;font-weight:800;">Repeat:&nbsp;</span>
+            <$edit-text tiddler=<<state>> field="page-cover#repeat" default=<<cover-repeat>> placeholder=""/>
+            <$button setTitle=<<tiddler>> setField="page-cover#repeat" setTo={{{ [<state>get[page-cover#repeat]!is[blank]else<cover-repeat>] }}} style="color:inherit !important;cursor:pointer;font-weight:800;">Set</$button>
+        </div>
+    </div>
+    </$let>
+</$reveal>
+\end
+
+<$set name="tiddler" value=<<currentTiddler>>>
+<$list filter="[<currentTiddler>addprefix[$:/temp/Gk0Wk/notionpage-covericon/Selector/]]" variable="stateTiddler1">
+<$list filter="[<currentTiddler>addprefix[$:/temp/Gk0Wk/notionpage-covericon/ChangeCover/]]" variable="stateTiddler2">
+<$set name="icon" value={{!!icon}}>
+<$set name="cover" value={{!!page-cover}}>
+<$list filter="[<icon>match[]]">
+<$list filter="[<cover>match[]]">
+  <!-- !icon && !cover -->
+  <div class="gk0wk-notionpagebg gk0wk-notionpagebg-n">
+    <div class="gk0wk-notionbg-addbuttons">
+      <$button setTitle=<<tiddler>> setField="icon" setTo={{$:/plugins/Gk0Wk/notionpage-covericon/default-icon}} tooltip="Add Icon">😁 Add Icon</$button>
+      <$button setTitle=<<tiddler>> setField="page-cover" setTo={{$:/plugins/Gk0Wk/notionpage-covericon/default-pagecover-url}} tooltip="Add Cover">{{$:/core/images/picture}} Add Cover</$button>
+    </div>
+  </div>
+</$list>
+<$list filter="[<cover>!match[]]">
+  <!-- !icon && cover -->
+  <div class="gk0wk-notionpagebg gk0wk-notionpagebg-c">
+    <$macrocall
+        $name="coverbox-db"
+        cover=<<cover>>
+        tiddler=<<tiddler>>
+        class-outer="gk0wk-notionpagebg-imagebox"
+        class-blur-bg="gk0wk-notionpagebg-image-blur"
+        class-front-bg="gk0wk-notionpagebg-image-front"
+    />
+    <$button popup=<<stateTiddler2>> class="gk0wk-notionpageb-changecover" tooltip="Change Cover">Change Cover</$button>
+    <<cover-setting>>
+    <div class="gk0wk-notionbg-addbuttons">
+      <$button setTitle=<<tiddler>> setField="icon" setTo={{$:/plugins/Gk0Wk/notionpage-covericon/default-icon}} tooltip="Add Icon">😁 Add Icon</$button>
+    </div>
+  </div>
+</$list>
+</$list>
+<$list filter="[<icon>!match[]]">
+<$list filter="[<cover>match[]]">
+  <!-- icon && !cover -->
+  <div class="gk0wk-notionpagebg gk0wk-notionpagebg-i">
+    <$button popup=<<stateTiddler1>> class="gk0wk-notionpagebg-icon1"><$list filter="[title<icon>is[tiddler]]"><$transclude tiddler=<<icon>>/></$list>
+    <$list filter="[title<icon>is[shadow]]"><$transclude tiddler=<<icon>>/></$list>
+    <$list filter="[title<icon>is[tiddler]]"><$transclude tiddler=<<icon>>/></$list>
+    <$list filter="[title<icon>!is[shadow]!is[tiddler]]"><$wikify name="rendered" text=<<icon>> output=html><<rendered>></$wikify></$list></$button>
+    <$reveal type="popup" state=<<stateTiddler1>> position="below" tag="div" class="tc-popup-keep">
+      {{$:/plugins/Gk0Wk/notionpage-covericon/icon-selector}}
+    </$reveal>
+    <div class="gk0wk-notionbg-addbuttons">
+      <$button setTitle=<<tiddler>> setField="page-cover" setTo={{$:/plugins/Gk0Wk/notionpage-covericon/default-pagecover-url}} tooltip="Add Cover">{{$:/core/images/picture}} Add Cover</$button>
+    </div>
+  </div>
+</$list>
+<$list filter="[<cover>!match[]]">
+  <!-- icon && cover -->
+  <div class="gk0wk-notionpagebg gk0wk-notionpagebg-ci">
+    <$macrocall
+        $name="coverbox-db"
+        cover=<<cover>>
+        tiddler=<<tiddler>>
+        class-outer="gk0wk-notionpagebg-imagebox"
+        class-blur-bg="gk0wk-notionpagebg-image-blur"
+        class-front-bg="gk0wk-notionpagebg-image-front"
+    />
+    <$button popup=<<stateTiddler1>> class="gk0wk-notionpagebg-icon2"><$list filter="[title<icon>is[tiddler]]"><$transclude tiddler=<<icon>>/></$list>
+    <$list filter="[title<icon>is[shadow]]"><$transclude tiddler=<<icon>>/></$list>
+    <$list filter="[title<icon>is[tiddler]]"><$transclude tiddler=<<icon>>/></$list>
+    <$list filter="[title<icon>!is[shadow]!is[tiddler]]"><$wikify name="rendered" text=<<icon>> output=html><<rendered>></$wikify></$list></$button>
+    <$reveal type="popup" state=<<stateTiddler1>> position="below" tag="div" class="tc-popup-keep">
+      {{$:/plugins/Gk0Wk/notionpage-covericon/icon-selector}}
+    </$reveal>
+    <$button popup=<<stateTiddler2>> class="gk0wk-notionpageb-changecover" tooltip="Change Cover">Change Cover</$button>
+    <<cover-setting>>
+  </div>
+</$list>
+</$list>
+</$set>
+</$set>
+</$list>
+</$list>
+</$set>

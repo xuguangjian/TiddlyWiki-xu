@@ -1,0 +1,27 @@
+created: 20190122222437252
+creator: Thomas Elmiger
+list-after: $:/core/ui/ViewTemplate/plugin
+modified: 20231231002534001
+modifier: Thomas Elmiger
+title: $:/plugins/telmiger/PluginSize/template
+type: text/vnd.tiddlywiki
+
+<div class="tiddler-size-indicator">
+<$let 
+size={{{ [<currentTiddler>get[text]length[]] }}} 
+iconS={{{ [<size>compare:number:gt[25000]then[obvious]else[simple]] }}}
+iconM={{{ [<size>compare:number:gt[50000]then[complicated]else<iconS>] }}}
+iconL={{{ [<size>compare:number:gt[100000]then[complex]else<iconM>] }}}
+icon={{{ [<size>compare:number:gt[500000]then[chaotic]else<iconL>] }}}
+sizek={{{ [<size>divide[1000]fixed[1]] }}}
+>
+<$let
+commentS={{{ [<icon>match[obvious]then[small]else[tiny]] }}}
+commentM={{{ [<icon>match[complicated]then[medium]else<commentS>] }}}
+commentL={{{ [<icon>match[complex]then[big]else<commentM>] }}}
+comment={{{ [<icon>match[chaotic]then[gigantic]else<commentL>] }}}
+>
+<$transclude $variable="HarveyBall" variant=<<icon>> title=<<comment>>/> – plugin size:  <<sizek>> k characters (<<size>>)
+</$let>
+</$let>
+</div>

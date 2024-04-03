@@ -1,0 +1,25 @@
+modified: 20231229042806833
+tags: $:/tags/Macro
+title: $:/plugins/kookma/hsl/macros/hslines
+type: text/vnd.tiddlywiki
+
+\define hslines(src, begin, end, hlrange, language, offset:0)
+\import $:/plugins/kookma/hsl/macros/utility
+<$wikify name="numbers" text=<<rawlist>> >
+<$let length={{{ [[$end$]subtract[$begin$]add[1]] }}} source={{{[<__src__>get[text]else<__src__>]}}} >
+<$macrocall $name="hsl-copy-to-clipboard-above-right" src={{{ [<source>splitregexp[\r?\n|\r]first<__end__>last<length>] :and[join[
+]] }}} />
+<$set name="hlrange" filter="[<source>splitregexp[\r?\n|\r]addsuffix[ ]first[$end$]last<length>]">
+<ol start="$begin$" class="code-list" style="counter-reset: linenumber calc($begin$ + $offset$ - 1);">
+<$list filter="[range[$begin$,$end$,1]]" variable=num>
+<$list filter="[enlist<numbers>nsort[]match<num>then[code-selected]else[code-notselected]]" variable="selected-class">
+<$let pos={{{ [<num>subtract[$begin$]add[1]] }}} >
+<li class=<<selected-class>>><$codeblock code={{{ [enlist:raw<hlrange>nth<pos>] :else[[ ]]  }}} language=<<__language__>>/></li> 
+</$let>
+</$list>
+</$list>
+</ol>
+</$set>
+</$let>
+</$wikify>
+\end hslines

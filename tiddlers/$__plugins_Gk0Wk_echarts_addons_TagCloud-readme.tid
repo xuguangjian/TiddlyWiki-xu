@@ -1,0 +1,8 @@
+title: $:/plugins/Gk0Wk/echarts/addons/TagCloud-readme
+type: text/vnd.tiddlywiki
+
+```html
+<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TagCloud.js" />
+```
+
+<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TagCloud.js" />

@@ -1,0 +1,13 @@
+[
+    {
+        "title": "$:/plugins/Gk0Wk/echarts/addons/Function.js",
+        "type": "application/javascript",
+        "module-type": "echarts-component",
+        "caption": "Function",
+        "echarts.author": "Gk0Wk(Sttot)",
+        "echarts.readme": "{{$:/plugins/Gk0Wk/echarts/addons/Function-readme}}",
+        "Modern.TiddlyDev#IncludeSource": "false",
+        "Modern.TiddlyDev#Origin": "addons/Gk0Wk/Function/Function.ts",
+        "text": "\"use strict\";var __defProp=Object.defineProperty,__getOwnPropDesc=Object.getOwnPropertyDescriptor,__getOwnPropNames=Object.getOwnPropertyNames,__hasOwnProp=Object.prototype.hasOwnProperty,__export=(e,t)=>{for(var o in t)__defProp(e,o,{get:t[o],enumerable:!0})},__copyProps=(t,o,n,r)=>{if(o&&\"object\"==typeof o||\"function\"==typeof o)for(let e of __getOwnPropNames(o))__hasOwnProp.call(t,e)||e===n||__defProp(t,e,{get:()=>o[e],enumerable:!(r=__getOwnPropDesc(o,e))||r.enumerable});return t},__toCommonJS=e=>__copyProps(__defProp({},\"__esModule\",{value:!0}),e),Function_exports={},addon=(__export(Function_exports,{\"default\":()=>Function_default}),module.exports=__toCommonJS(Function_exports),{shouldUpdate:(e,t,o)=>0<$tw.utils.count(o),onUpdate:(e,t,o)=>{var n=Math.max(1,Math.min(1e5,parseInt(o.res,10)||200));let r=Number(o.min)||-1,i=Number(o.max)||1;Number.isFinite(r)||(r=-1),Number.isFinite(i)||(i=1),r>i&&([i,r]=[r,i]);const a=new Function(\"x\",`return ${o.func};`||\"return x;\");var s=e=>Math.max(-9e8,Math.min(9e8,a(e))),p=[],_=(i-r)/Math.min(n,1e5);for(let u=0,m=r;u<n;u+=1,m+=_)p.push([m,s(m)]);p.push([i,s(i)]),e.setOption({animation:!1,grid:{top:40,left:50,right:40,bottom:50},tooltip:{trigger:\"axis\"},xAxis:{name:\"x\",minorTick:{show:!0},minorSplitLine:{show:!0}},yAxis:{name:o.yaxis||\"f(x)\",minorTick:{show:!0},minorSplitLine:{show:!0}},dataZoom:[{show:!0,type:\"inside\",filterMode:\"none\",xAxisIndex:[0],startValue:-20,endValue:20},{show:!0,type:\"inside\",filterMode:\"none\",yAxisIndex:[0],startValue:-20,endValue:20}],series:[{type:\"line\",showSymbol:!1,clip:!0,data:p}]})}}),Function_default=addon;"
+    }
+]
